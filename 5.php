@@ -3,12 +3,9 @@
 // Запишите в сессию время захода пользователя на сайт. При обновлении страницы выводите сколько секунд назад пользователь зашел на сайт.
 session_start();
 
-if (!isset($_SESSION['seconds'])) {
-    $_SESSION['seconds'] = time();
-    $_SESSION['count'] = 1;
-} else
-    $_SESSION['seconds'] = time();
-    $_SESSION['count'] += 1;
-
-echo $_SESSION['seconds'] . "<br>";
-echo 'Ur page has been reloaded ' . $_SESSION['count'] . ' times' . "<br>";
+if (!isset($_SESSION['user_login'])) {
+    $_SESSION['user_login'] = date('Y-m-d H:i:s');
+} else {
+    $second = time() - strtotime($_SESSION['user_login']);
+    echo 'You are logged in ' . $second . ' seconds ago';
+}
